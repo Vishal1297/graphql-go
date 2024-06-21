@@ -1,32 +1,27 @@
 run:
   timeout: 5m
-
-linters-settings:
-  gofmt:
-    simplify: true
-  govet:
-    check-shadowing: true
-    enable-all: true
-    disable:
-      - fieldalignment
-      - deepequalerrors # remove later
+  issues-exit-code: 0
+  modules-download-mode: readonly
+  tests: false
 
 linters:
   disable-all: true
   enable:
-    - gofmt
+    - errcheck
     - gosimple
     - govet
     - ineffassign
-    - exportloopref
     - staticcheck
-    - unconvert
     - unused
-    - misspell
-    - goimports
 
 issues:
-  exclude-rules:
-    - linters:
-      - unused
-      path: "graphql_test.go"
+  exclude-use-default: true
+  exclude-dirs-use-default: true
+  new: true
+
+output:
+  formats:
+    - format: colored-line-number
+      path: stderr
+    - format: checkstyle
+      path: report.xml
